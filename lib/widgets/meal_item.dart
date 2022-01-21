@@ -3,6 +3,7 @@ import 'package:meals_app/models/meal.dart';
 import 'package:meals_app/screens/meal_detail.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -14,7 +15,8 @@ class MealItem extends StatelessWidget {
       required this.imageUrl,
       required this.duration,
       required this.complexity,
-      required this.affordability});
+      required this.affordability,
+      required this.id});
 
   String get complexityText {
     switch (complexity) {
@@ -44,7 +46,7 @@ class MealItem extends StatelessWidget {
 
   void mealDetailScreen(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(MealDetailScreen.routeName,
-        arguments: {'title': title, 'imageUrl': imageUrl});
+        arguments: id);
   }
 
   @override

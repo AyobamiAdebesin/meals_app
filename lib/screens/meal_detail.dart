@@ -1,33 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   const MealDetailScreen({Key? key}) : super(key: key);
 
-  static const routeName = '/meal_detail';
+  static const routeName = '/meal-detail';
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final mealtitle = routeArgs['title'];
-    final imageurl = routeArgs['imageUrl'];
+    final mealId = ModalRoute.of(context)!.settings.arguments as String;
+    final selectedMeal =
+        DUMMY_MEALS.firstWhere((element) => element.id == mealId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Meal Details'),
+        title: Text('${selectedMeal.title}'),
       ),
-      body: Card(
-        
-        elevation: 10,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-              child: Image.network(imageurl.toString())
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
+              selectedMeal.imageUrl,
+              fit: BoxFit.cover,
             ),
-            Text('$mealtitle')
-          ],
-        ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            child: Text(
+              'Ingredients',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.grey,
+              ),
+            ),
+            height: 150,
+            width: 300,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return Card(
+                  color: Theme.of(context).accentColor,
+                  child: Text(selectedMeal.ingredients[index]),
+                );
+              },
+              itemCount: selectedMeal.ingredients.length,
+            ),
+          ),
+        ],
       ),
     );
   }
