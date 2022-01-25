@@ -28,8 +28,10 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: Text(_pages[_selectedPageIndex]['title'] as String,
-            style: TextStyle(fontSize: 20)),
+        title: Text(
+          _pages[_selectedPageIndex]['title'] as String,
+          style: TextStyle(fontSize: 20),
+        ),
       ),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: Container(

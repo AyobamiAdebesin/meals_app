@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/widgets/meal_item.dart';
 import '../dummy_data.dart';
 
-class ApplessWidget extends StatelessWidget {
-  const ApplessWidget({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
-
 class CategoryMealsScreen extends StatelessWidget {
   static final routeName = '/category-meals';
   // final String categoryId;
