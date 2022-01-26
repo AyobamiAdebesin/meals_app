@@ -75,7 +75,7 @@ class MealDetailScreen extends StatelessWidget {
                   itemCount: selectedMeal.steps.length,
                   itemBuilder: (ctx, index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical:10),
+                      margin: EdgeInsets.symmetric(vertical: 10),
                       child: ListTile(
                         leading: CircleAvatar(
                           radius: 30,
@@ -93,6 +93,12 @@ class MealDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pop(mealId);
+        },
+        child: Icon(Icons.delete),
       ),
     );
   }
