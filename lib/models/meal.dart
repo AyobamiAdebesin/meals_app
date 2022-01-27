@@ -24,8 +24,8 @@ class Meal {
   final Affordability affordability;
   final bool isGlutenFree;
   final bool isLactoseFree;
-  final isVegan;
-  final isVegetarian;
+  final bool isVegan;
+  final bool isVegetarian;
 
   const Meal(
       {required this.id,

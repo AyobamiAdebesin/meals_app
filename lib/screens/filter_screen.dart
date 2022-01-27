@@ -2,25 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key? key}) : super(key: key);
   static const routeName = '/filters';
+
+  final saveFilters;
+  final Map<String, bool> currentFilters;
+
+  const FilterScreen(this.currentFilters, this.saveFilters);
 
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  var _glutenFree = false;
-  var _vegetarian = false;
-  var _vegan = false;
-  var _lactoseFree = false;
+  bool _glutenFree = false;
+  bool _vegetarian = false;
+  bool _vegan = false;
+  bool _lactoseFree = false;
+
+  @override
+  initState() {
+    _glutenFree = widget.currentFilters['gluten'] as bool;
+    _lactoseFree = widget.currentFilters['lactose'] as bool;
+    _vegetarian = widget.currentFilters['vegetarian'] as bool;
+    _vegan = widget.currentFilters['vegan'] as bool;
+    super.initState();
+  }
 
   Widget _buildSwitchListTile(
       {required String title,
       required String description,
       required bool currentValue,
       required updateValue}) {
-    return SwitchListTile(activeColor: Colors.red,
+    return SwitchListTile(
+      activeColor: Colors.red,
       value: currentValue,
       onChanged: updateValue,
       title: Text(title),
@@ -34,6 +48,20 @@ class _FilterScreenState extends State<FilterScreen> {
       drawer: MainDrawer(),
       appBar: AppBar(
         title: Text('Filters'),
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(Icons.save),
+        //     onPressed: () {
+        //       final selectedFilters = {
+        //         'gluten': false,
+        //         'lactose': false,
+        //         'vegan': false,
+        //         'vegetarian': false
+        //       };
+        //       widget.saveFilters(selectedFilters);
+        //     },
+        //   ),
+        // ],
       ),
       body: Column(
         children: [
@@ -87,6 +115,28 @@ class _FilterScreenState extends State<FilterScreen> {
                     });
                   },
                 ),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(50, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      final selectedFilters = {
+                        'gluten': false,
+                        'lactose': false,
+                        'vegan': false,
+                        'vegetarian': false
+                      };
+                      widget.saveFilters(selectedFilters);
+                    },
+                    icon: Icon(Icons.save),
+                    label: Text('Save'),
+                  ),
+                )
               ],
             ),
           ),
