@@ -56,7 +56,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
           return MealItem(
             id: displayedMeals[index].id,
             title: displayedMeals[index].title,
-            removeItem: _removeMeal,
             imageUrl: displayedMeals[index].imageUrl,
             duration: displayedMeals[index].duration,
             complexity: displayedMeals[index].complexity,
